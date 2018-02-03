@@ -1,0 +1,146 @@
+from decimal import Decimal
+import mibian
+#import mibianLib
+import os
+clear = lambda: os.system('cls')
+clear()
+print ("""             Merton Pricing for European Options for Stocks with Dividends
+
+
+                """)
+corp = input("Call, Put, Vol, Parity, or Define? ")
+if corp == "Call" or corp == "call":
+    print("")
+    print("Call Option Analytics")
+    underpx = input("Underlying Price = ")
+    xpx = input("Strike Price = ")
+    intrt = input("Interest Rate = ")
+    adiv = input("Annual Dividend = ")
+    dte = input("Days to Expiration = ")
+    #vol = input("Volatility = ")
+    cpx = input("Call Price = ")
+    #ppx = input("Put Price = ")
+    #import mibian
+    c=mibian.Me([underpx, xpx, intrt, adiv, dte], callPrice = cpx)
+    print ("")
+    print ("Implied Vol ", round(c.impliedVolatility,4))
+    ivol = c.impliedVolatility
+    c=mibian.Me([underpx, xpx, intrt, adiv, dte], volatility = ivol)
+    #print ("Call Price ",c.callPrice)
+    print("")
+    print ("Put Price ", round(c.putPrice, 4))
+    print ("Call Delta ", round(c.callDelta, 4))
+    print ("Put Delta ", round(c.putDelta, 4))
+    print ("Call Theta ", round(c.callTheta, 4))
+    print ("Put Theta ", round(c.putTheta, 4))
+    print ("Call Rho ", round(c.callRho, 4))
+    print ("Put Rho ", round(c.putRho, 4))
+    print ("Vega ", round(c.vega, 4))
+    print ("Gamma ", round(c.gamma, 4))
+
+elif corp == "Put" or corp == "put":
+    print("")
+    print("Put Option Analytics")
+    underpx = input("Underlying Price = ")
+    xpx = input("Strike Price = ")
+    intrt = input("Interest Rate = ")
+    adiv = input("Annual Dividend = ")
+    dte = input("Days to Expiration = ")
+    #vol = input("Volatility = ")
+    #cpx = input("Call Price = ")
+    ppx = input("Put Price = ")
+    #import mibian
+    c=mibian.Me([underpx, xpx, intrt, adiv, dte], putPrice=ppx)
+    print("")
+    print ("Implied Vol ", c.impliedVolatility)
+    ivol = c.impliedVolatility
+    c=mibian.Me([underpx, xpx, intrt, adiv, dte], volatility = ivol)
+    print("")
+    print ("Call Price ", round(c.callPrice, 4))
+    #print ("Put Price ", round(c.putPrice, 4))
+    print ("Call Delta ", round(c.callDelta, 4))
+    print ("Put Delta ", round(c.putDelta, 4))
+    print ("Call Theta ", round(c.callTheta, 4))
+    print ("Put Theta ", round(c.putTheta, 4))
+    print ("Call Rho ", round(c.callRho, 4))
+    print ("Put Rho ", round(c.putRho, 4))
+    print ("Vega ", round(c.vega, 4))
+    print ("Gamma ", round(c.gamma, 4))
+elif corp == "Vol" or corp == "vol":
+    print("")
+    print("Option Analytics based on Vol")
+    underpx = input("Underlying Price = ")
+    xpx = input("Strike Price = ")
+    intrt = input("Interest Rate = ")
+    adiv = input("Annual Dividend = ")
+    dte = input("Days to Expiration = ")
+    vol = input("Volatility = ")
+    #cpx = input("Call Price = ")
+    #ppx = input("Put Price = ")
+    #import mibian
+    c=mibian.Me([underpx, xpx, intrt, adiv, dte], volatility=vol)
+    print("")
+    print ("Call Price ",c.callPrice)
+    print ("Put Price ", c.putPrice)
+    print ("Call Delta ", c.callDelta)
+    print ("Put Delta ", c.putDelta)
+    print ("Call Theta ", c.callTheta)
+    print ("Put Theta ", c.putTheta)
+    print ("Call Rho ", c.callRho)
+    print ("Put Rho ", c.putRho)
+    print ("Vega ", c.vega)
+    print ("Gamma ", c.gamma)
+
+elif corp == "Define" or corp == "define":
+    print("")
+    print ("What variable would you like to define:")
+    grk = input("   Delta, Theta, Rho, Vega, or Gamma? ")
+    if grk == "Delta" or grk == "delta":
+        print ("""
+        Delta Measures the degree to which an option is exposed to
+        shifts in the price of the underlying asset.
+        Values range from 1.0 to –1.0
+        """)
+    elif grk == "Theta" or grk == "theta":
+        print ("""
+        Theta is a Measure of the rate of decline in the value
+        of an option due to the passage of time.
+        It can also be referred to as the time decay on the value of an option.
+        If everything is held constant, the option loses value as time moves
+        closer to the maturity of the option.
+        """)
+    elif grk == "Rho" or grk == "rho":
+        print ("""
+        Rho Measures the sensitivity of an option or options
+        portfolio to a change in interest rate.
+        """)
+    elif grk == "Vega" or grk == "vega":
+        print ("""
+        The vega of an option expresses the change in the price of the
+        option for every 1% change in underlying volatility.
+        """)
+    elif grk == "Gamma" or grk == "gamma":
+        print ("""
+        Gamma is the rate of change in an option's delta
+        per 1-point move in the underlying asset's price.
+        """)
+    else:
+        print("""
+        Please check your spelling
+        """)
+elif corp == "Parity" or corp == "parity":
+    underpx = input("Underlying Price = ")
+    xpx = input("Strike Price = ")
+    intrt = input("Interest Rate = ")
+    dte = input("Days to Expiration = ")
+    #vol = input("Volatility = ")
+    cpx = input("Call Price = ")
+    ppx = input("Put Price = ")
+    #import mibian
+    c=mibian.Me([underpx, xpx, intrt, dte], callPrice=cpx, putPrice=ppx)
+
+    print("Put-Call Parity ", c.putCallParity)
+else:
+    print("""
+    Please check your spelling
+    """)
