@@ -53,9 +53,11 @@ if corp in ["Call", "call"]:
         print ("Vega ", round(c.vega, 4))
         print ("Gamma ", round(c.gamma, 4))
         print ("")
-        graph = input("Would you like to graph the ? (Y/N)")
-        if graph in ["y", "Y", "yes", "Yes"]:
-            cpx = cpx * -1
+        
+        #Working on graphing payout & PnL
+        #graph = input("Would you like to graph the ? (Y/N)")
+        #if graph in ["y", "Y", "yes", "Yes"]:
+        #    cpx = cpx * -1
 
 elif corp in ["Put", "put"]:
     print("")
